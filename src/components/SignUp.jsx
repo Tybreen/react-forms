@@ -39,8 +39,8 @@ function SignUp({setToken, isSignedIn}) {
     <>
       <h2>Sign up</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={username} placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
-        <input type="password" value={password} placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+        <input type="text" value={username} placeholder="Username" onChange={(event) => setUsername(event.target.value)} required/>
+        <input type="password" value={password} placeholder="Password" onChange={(event) => setPassword(event.target.value)} required/>
         <button type="submit">Sign Up!</button>
       </form>
       {
