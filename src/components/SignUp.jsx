@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-function SignUp({setToken}) {
+function SignUp({setToken, isSignedIn}) {
 
   const [username, setUsername] = useState(``);
   const [password, setPassword] = useState(``);
+  const [message, setMessage] = useState(``);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,8 +26,8 @@ function SignUp({setToken}) {
       const json = await response.json();
       
       setToken(json.token);
-      console.log(json);
       localStorage.setItem(`Token`, json.token);
+      setMessage(json.message);
 
     }
     catch(error) {
@@ -36,11 +37,19 @@ function SignUp({setToken}) {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={username} placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
-      <input type="text" value={password} placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
-      <button type="submit">Sign Up!</button>
-    </form>
+      <h2>Sign up</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={username} placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
+        <input type="password" value={password} placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+        <button type="submit">Sign Up!</button>
+      </form>
+      {
+        isSignedIn ? 
+        <p>You are already signed in.</p> 
+        :
+        <p>{message}</p>
+      }
+      
     </>
   )
 }
